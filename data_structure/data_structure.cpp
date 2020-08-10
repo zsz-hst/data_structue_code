@@ -13,7 +13,6 @@ using namespace std;
 
 
 
-
 //int insertElem(int sqList[], int &length ,int p, int e);
 //int deletElem(int sqList[],int &length, int p, int &e);
 //
