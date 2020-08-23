@@ -1,9 +1,9 @@
 ﻿#include <iostream>
 #include <stdio.h>
 #include<stdlib.h>
-#include <cstdlib>
-#include <stddef.h>
-#include <cstddef>
+//#include <cstdlib>
+//#include <stddef.h>
+//#include <cstddef>
 # include <string.h>
 
 #define Length 9
@@ -2590,62 +2590,2114 @@ using namespace std;
 
 
 
-//T3.3.3
-//用栈实现递归（看看答案怎么写的，这不是标答）
-typedef struct Strack {
-    double data[MaxSize];
-    int top;
-}Strack;
+////T3.3.3
+////用栈实现递归（看看答案怎么写的，这不是标答）
+//typedef struct Strack{
+//        double data[MaxSize];
+//        int top;
+//    }Strack;
+//
+//void calculate_p(int n ,double x)
+//{
+//    Strack *st;
+//    st = (Strack*)malloc(sizeof(Strack));
+//    st->top = -1;
+//    double val0 = 1;
+//    double val1 = 2*x;
+//    st->data[0] = 1;
+//    st->data[1] = 2*x;
+//    st->top = 2;
+//    while(st->top < n+1)
+//    {
+//        st->data[st->top] = 2*x*val1-2*(st->top-1)*val0;
+//        st->data[st->top] == 0? 0:st->data[st->top]; //避免输出-0
+//        val0 = val1;
+//        val1 = st->data[st->top];
+//        st->top++;
+//    }
+//    if(n==0)
+//        cout << 0 << endl;
+//    else if (n==1)
+//        cout << 2*x << endl;
+//    else
+//        cout << st->data[n] <<endl;
+//        cout << (-0 == 0)<<endl;
+//}
+//
+//
+//int main()
+//{
+//    calculate_p(4,0);
+//}
 
-void calculate_p(int n, double x)
+
+
+
+//*******************************树********************************//
+
+////先序创建二叉树
+//typedef char ElemType;
+//typedef struct BiTNode {
+//    ElemType data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//
+////先序创建二叉树
+//void CreateBitTree(BiTree& T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if (ch == '#')
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreateBitTree(T->lChild);
+//        CreateBitTree(T->rChild);
+//    }
+//}
+//
+////先序递归遍历二叉树
+//void PreOrder(BiTree& T)
+//{
+//    if (T != NULL)
+//    {
+//        cout << T->data << endl;
+//        PreOrder(T->lChild);
+//        PreOrder(T->rChild);
+//    }
+//}
+//
+////中序遍历二叉树
+//void InOrder(BiTree& T)
+//{
+//    if (T != NULL)
+//    {
+//        InOrder(T->lChild);
+//        cout << T->data << endl;
+//        InOrder(T->rChild);
+//    }
+//}
+//
+////后序遍历二叉树
+//void PostOrder(BiTree& T)
+//{
+//    if (T != NULL)
+//    {
+//        PostOrder(T->lChild);
+//        PostOrder(T->rChild);
+//        cout << T->data << endl;
+//    }
+//}
+//
+//
+////*************//
+////*************//
+////用栈遍历
+////栈的定义
+//typedef struct {
+//    BiTNode* data[MaxSize];
+//    int top;
+//}SqStack;
+//void InitStack(SqStack& S)
+//{
+//    S.top = -1;
+//}
+//bool Push(SqStack& S, BiTNode* x)
+//{
+//    if (S.top == MaxSize - 1)
+//        return false;
+//    S.data[++S.top] = x;
+//    return true;
+//}
+//bool Pop(SqStack& S, BiTNode*& x)
+//{
+//    if (S.top == -1)
+//        return false;
+//    x = S.data[S.top--];
+//    return true;
+//}
+////栈先序遍历
+//void PreOrder2(BiTree T) {
+//    SqStack S;
+//    InitStack(S);
+//    BiTree p = T;
+//    while (p || S.top > -1)
+//    {
+//        if (p)
+//        {
+//            cout << p->data << endl;
+//            Push(S, p);
+//            p = p->lChild;
+//        }
+//        else {
+//            Pop(S, p);
+//            p = p->rChild;
+//        }
+//    }
+//}
+//
+////栈中序遍历
+//void InOrder2(BiTree T) {
+//    SqStack S;
+//    InitStack(S);
+//    BiTree p = T;
+//    while (p || S.top > -1)
+//    {
+//        if (p)
+//        {
+//            Push(S, p);
+//            p = p->lChild;
+//        }
+//        else {
+//            Pop(S, p);
+//            cout << p->data << endl;
+//            p = p->rChild;
+//        }
+//    }
+//}
+//
+////栈后序遍历
+//void PostOrder2(BiTree& T)
+//{
+//    SqStack S;
+//    InitStack(S);
+//    BiTNode* p = T, * r = NULL;
+//    while (p || S.top != -1)
+//    {
+//        if (p)
+//        {
+//            Push(S, p);
+//            p = p->lChild;
+//        }
+//        else {
+//            p = S.data[S.top];
+//            if (p->rChild && p->rChild != r)
+//            {
+//                p = p->rChild;
+//                Push(S, p);
+//                p = p->lChild;
+//            }
+//            else {
+//                Pop(S, p);
+//                cout << p->data << endl;
+//                r = p;
+//                p = NULL;
+//            }
+//        }
+//    }
+//}
+//
+//
+////通过队列实现层次遍历
+////队列初始化操作
+//typedef struct {
+//    BiTNode* data[MaxSize];
+//    int front, rear;
+//}SqQueue;
+//void InitQueue(SqQueue& Q)
+//{
+//    Q.front = Q.rear = 0;
+//}
+//bool EnQueue(SqQueue& Q, BiTNode* x)
+//{
+//    if ((Q.rear + 1) % MaxSize == Q.front)
+//        return false;
+//    Q.data[Q.rear] = x;
+//    Q.rear = (Q.rear + 1) % MaxSize;
+//    return true;
+//}
+//bool DeQueue(SqQueue& Q, BiTNode*& x)
+//{
+//    if (Q.front == Q.rear)
+//        return false;
+//    x = Q.data[Q.front];
+//    Q.front = (Q.front + 1) % MaxSize;
+//    return true;
+//}
+//void LevelOrder(BiTree& T)
+//{
+//    SqQueue Q;
+//    InitQueue(Q);
+//    BiTree p = T;
+//    EnQueue(Q, T);
+//    while (!(Q.front == Q.rear))
+//    {
+//
+//        DeQueue(Q, p);
+//        cout << p->data << endl;
+//        if (p->lChild != NULL)
+//            EnQueue(Q, p->lChild);
+//        if (p->rChild != NULL)
+//            EnQueue(Q, p->rChild);
+//    }
+//}
+//
+//
+//int main()
+//{
+//    BiTNode* T;
+//    CreateBitTree(T);
+//    PreOrder(T);
+//    cout << endl << endl;
+//    InOrder(T);
+//    cout << endl << endl;
+//    PostOrder(T);
+//    cout << endl << endl;
+//    cout << endl << endl;
+//    cout << endl << endl;
+//    PreOrder2(T);
+//    cout << endl << endl;
+//    InOrder2(T);
+//    cout << endl << endl;
+//    PostOrder2(T);
+//    cout << endl << endl;
+//    LevelOrder(T);
+//
+//}
+
+
+
+////T5.3.4
+////自下而上，从右到左遍历
+////层次压栈，出栈
+////队列初始化操作
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//
+//void CreateBitTree(BiTree& T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if (ch == '#')
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreateBitTree(T->lChild);
+//        CreateBitTree(T->rChild);
+//    }
+//}
+//
+//typedef struct {
+//    BiTNode* data[MaxSize];
+//    int front, rear;
+//}SqQueue;
+//void InitQueue(SqQueue& Q)
+//{
+//    Q.front = Q.rear = 0;
+//}
+//bool EnQueue(SqQueue& Q, BiTNode* x)
+//{
+//    if ((Q.rear + 1) % MaxSize == Q.front)
+//        return false;
+//    Q.data[Q.rear] = x;
+//    Q.rear = (Q.rear + 1) % MaxSize;
+//    return true;
+//}
+//bool DeQueue(SqQueue& Q, BiTNode*& x)
+//{
+//    if (Q.front == Q.rear)
+//        return false;
+//    x = Q.data[Q.front];
+//    Q.front = (Q.front + 1) % MaxSize;
+//    return true;
+//}
+////栈的定义
+//typedef struct {
+//    BiTNode* data[MaxSize];
+//    int top;
+//}SqStack;
+//void InitStack(SqStack& S)
+//{
+//    S.top = -1;
+//}
+//bool Push(SqStack& S, BiTNode* x)
+//{
+//    if (S.top == MaxSize - 1)
+//        return false;
+//    S.data[++S.top] = x;
+//    return true;
+//}
+//bool Pop(SqStack& S, BiTNode*& x)
+//{
+//    if (S.top == -1)
+//        return false;
+//    x = S.data[S.top--];
+//    return true;
+//}
+//
+//void ReLevelOrder(BiTree& T)
+//{
+//    SqStack S;
+//    SqQueue Q;
+//    InitQueue(Q);
+//    InitStack(S);
+//    BiTNode* p = T;
+//    EnQueue(Q, p);
+//    while (Q.front != Q.rear)
+//    {
+//        DeQueue(Q, p);
+//        Push(S, p);
+//        if (p->lChild != NULL)
+//            EnQueue(Q, p->lChild);
+//        if (p->rChild != NULL)
+//            EnQueue(Q, p->rChild);
+//    }
+//    while (S.top != -1)
+//    {
+//        Pop(S, p);
+//        cout << p->data << endl;
+//    }
+//}
+//
+//int main()
+//{
+//    BiTree T;
+//    CreateBitTree(T);
+//    ReLevelOrder(T);
+//}
+
+
+
+////T5.3.5
+////计算二叉树高度
+////递归调用（取左子树和右子树的最大高度）
+//typedef struct BiTNode{
+//    char data;
+//    BiTNode *lChild,*rChild;
+//}BiTNode,*BiTree;
+//void CreateBitTree(BiTree &T)
+//{
+//    char ch;
+//    cin  >> ch;
+//    if(ch == '#')
+//        T = NULL;
+//    else{
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreateBitTree(T->lChild);
+//        CreateBitTree(T->rChild);
+//    }
+//
+//}
+////非递归，利用层次遍历一层层遍历的特点，last表示每层最后一个元素，每次遍历到last就表明多了一层
+//typedef struct SqQueue{
+//    BiTNode* data[MaxSize];
+//    int front;
+//    int rear;
+//}SqQueue;
+//void InitQueue(SqQueue &Q)
+//{
+//    Q.front =Q.rear =0;
+//}
+//bool EnQueue(SqQueue &Q,BiTNode *x)
+//{
+//    if((Q.rear+1)%MaxSize == Q.front)
+//        return false;
+//    Q.data[Q.rear] = x;
+//    Q.rear = (Q.rear +1)%MaxSize;
+//    return true;
+//}
+//bool DeQueue(SqQueue &Q,BiTNode *&x)
+//{
+//    if(Q.front == Q.rear)
+//        return false;
+//    x = Q.data[Q.front];
+//    Q.front = (Q.front +1)%MaxSize;
+//    return true;
+//}
+//int find_hight2(BiTree T)
+//{
+//    SqQueue Q;
+//    InitQueue(Q);
+//    BiTNode *q = T;
+//    EnQueue(Q,q);
+//    int last = Q.rear,level = 0;
+//    while(Q.front != Q.rear)
+//    {
+//        DeQueue(Q,q);
+//        if(q->lChild)
+//            EnQueue(Q,q->lChild);
+//        if(q->rChild)
+//            EnQueue(Q,q->rChild);
+//        if(Q.front == last)
+//        {
+//            level ++;
+//            last = Q.rear;
+//        }
+//    }
+//    return level;
+//}
+//
+////递归算法
+////int find_hight(BiTree &T)
+////{
+////    if (T == NULL)
+////        return 0;
+////    else{
+////        return find_hight(T->lChild) > find_hight(T->rChild) ? find_hight(T->lChild) +1 :find_hight(T->rChild) +1;
+////    }
+////}
+//
+//int main()
+//{
+//    BiTree T;
+//    CreateBitTree(T);
+//    int high = find_hight2(T);
+//    cout << high << endl;
+//}
+
+
+
+////T5.3.6
+////先序、中序分别在A[1....n]、B[1....n]中，构建二叉树
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//
+//BiTNode* buildBiTree(char *A, char *B, int l1, int h1, int l2, int h2)
+//{
+//    BiTree T;
+//    T = (BiTNode*)malloc(sizeof(BiTNode));
+//    T->data = A[l1];
+//    int i;
+//    for (i = l2; B[i] != A[l1]; i++);
+//    int llen = i - l2;
+//    int rlen = h2 - i;
+//    if (llen)
+//        T->lChild = buildBiTree(A, B, l1 + 1, l1 + llen, l2, l2 + llen - 1);
+//    else
+//        T->lChild = NULL;
+//    if (rlen)
+//        T->rChild = buildBiTree(A, B, h1 - rlen + 1, h1, h2 - rlen + 1, h2);
+//    else
+//        T->rChild = NULL;
+//    return T;
+//}
+//void PreOreder(BiTNode* T)
+//{
+//    if (T)
+//    {
+//        cout << T->data << endl;
+//        PreOreder(T->lChild);
+//        PreOreder(T->rChild);
+//    }
+//}
+//int main()
+//{
+//    BiTree T;
+//    char A[10] = { 'z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i' };
+//    char B[10] = { 'z', 'b', 'c', 'a', 'e', 'd', 'g', 'h', 'f', 'i' };
+//    T = buildBiTree(A, B, 1, 9, 1, 9);
+//    PreOreder(T);
+//}
+//
+
+
+////T5.3.7
+////判断是否为完全二叉树
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreateBiTree(BiTree &T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if(ch == '#')
+//        T = NULL;
+//    else
+//    {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreateBiTree(T->lChild);
+//        CreateBiTree(T->rChild);
+//    }
+//}
+//typedef struct SqQueue{
+//    BiTNode*data[MaxSize];
+//    int front;
+//    int rear;
+//}SqQueue;
+//void InitQueue(SqQueue &Q)
+//{
+//    Q.front = Q.rear = 0;
+//}
+//bool EnQueue(SqQueue &Q,BiTree T)
+//{
+//    if((Q.rear+1)%MaxSize == Q.front)
+//        return false;
+//    Q.data[Q.rear] = T;
+//    Q.rear = (Q.rear+1)%MaxSize;
+//    return true;
+//}
+//bool DeQueue(SqQueue &Q,BiTree &T)
+//{
+//    if(Q.front == Q.rear)
+//        return false;
+//    T = Q.data[Q.front];
+//    Q.front = (Q.front+1)%MaxSize;
+//    return true;
+//}
+//bool judgeCompleteBiTree(BiTree &T)
+//{
+//    SqQueue Q;
+//    InitQueue(Q);
+//    BiTree q = T;
+//    EnQueue(Q,q);
+//    if(!T)
+//        return true;
+//    while(Q.front != Q.rear)
+//    {
+//        DeQueue(Q,q);
+//        if(q)
+//        {
+//            EnQueue(Q,q->lChild);
+//            EnQueue(Q,q->rChild);
+//        }
+//        else{
+//            while(Q.front != Q.rear)
+//            {
+//                DeQueue(Q,q);
+//                if(q)
+//                    return false;
+//            }
+//            return true;
+//        }
+//    }
+//    //答案把return true写在这里，我觉得一样的
+//}
+//
+//int main()
+//{
+//    BiTree T;
+//    CreateBiTree(T);
+//    int a = judgeCompleteBiTree(T);
+//    cout << a;
+//}
+
+
+
+
+
+////T5.3.8
+////计算双分支结点个数
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreateBiTree(BiTree &T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if(ch == '#')
+//        T= NULL;
+//    else{
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreateBiTree(T->lChild);
+//        CreateBiTree(T->rChild);
+//    }
+//}
+////自己写的
+//int count_double_node(BiTree &T)
+//{
+//    if(T->lChild && T->rChild)
+//    {
+//        return (count_double_node(T->lChild) + count_double_node(T->rChild) +1);
+//    }
+//    else if(T->rChild)
+//        return count_double_node(T->rChild);
+//    else if(T->lChild)
+//        return count_double_node(T->lChild);
+//    else
+//        return 0;
+//}
+////答案上的
+//int DsonNodes(BiTree T)
+//{
+//    if(T == NULL)
+//        return 0;
+//    else if(T->lChild && T->rChild)
+//        return DsonNodes(T->lChild) + DsonNodes(T->rChild) +1;
+//    else
+//        return DsonNodes(T->lChild) + DsonNodes(T->rChild);
+//}
+//int main()
+//{
+//    BiTree T;
+//    CreateBiTree(T);
+//    int a = count_double_node(T);
+//    cout << a << endl;
+//}
+
+
+
+
+////T5.3.9
+////所有子树左右交换
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreateBiTree(BiTree &T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if(ch == '#')
+//        T= NULL;
+//    else{
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreateBiTree(T->lChild);
+//        CreateBiTree(T->rChild);
+//    }
+//}
+//
+//void swapLRChild(BiTree &T)
+//{
+//    if(T != NULL)
+//    {
+//        //这三行和下面两行可以交换
+//        BiTree p = T->lChild;
+//        T->lChild = T->rChild;
+//        T->rChild = p;
+//
+//        swapLRChild(T->lChild);
+//        swapLRChild(T->rChild);
+//
+//    }
+//}
+//void PreOrder(BiTree &T)
+//{
+//    if(T != NULL)
+//    {
+//        cout << T->data <<endl;
+//        PreOrder(T->lChild);
+//        PreOrder(T->rChild);
+//    }
+//}
+//int main()
+//{
+//    BiTree T;
+//    CreateBiTree(T);
+//    swapLRChild(T);
+//    PreOrder(T);
+//}
+
+
+
+
+////T5.3.10
+////找到正序二叉树第k个值
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreateBiTree(BiTree &T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if(ch == '#')
+//        T= NULL;
+//    else{
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreateBiTree(T->lChild);
+//        CreateBiTree(T->rChild);
+//    }
+//}
+//
+//typedef struct SqStuck{
+//    BiTNode *data[MaxSize];
+//    int top;
+//}SqStuck;
+//void InitStuck(SqStuck &S)
+//{
+//    S.top = -1;
+//}
+//bool Push(SqStuck &S,BiTNode *T)
+//{
+//    if(S.top == MaxSize-1)
+//        return false;
+//    S.data[++S.top] = T;
+//    return true;
+//}
+//bool Pop(SqStuck &S,BiTNode *&T)
+//{
+//    if(S.top == -1)
+//        return  false;
+//    T = S.data[S.top--];
+//    return true;
+//}
+//
+////自己写的、用栈
+//char find_k_value(BiTree &T,int k)
+//{
+//    SqStuck S;
+//    InitStuck(S);
+//    BiTree q = T;
+//    int i = 0;
+//    while(q || S.top!=-1)
+//    {
+//        if(q)
+//        {
+//            if(++i == k)
+//                return q->data;
+//            Push(S,q);
+//            q = q->lChild;
+//        }
+//        else
+//        {
+//            Pop(S,q);
+//            //上面的if语句放在这是中序
+//            q = q->rChild;
+//        }
+//    }
+//    return '#'; //k太大了返回#
+//}
+////答案、递归
+//int i = 1;
+//char PreNode(BiTree &T,int k)
+//{
+//    if(T == NULL)
+//        return '#';
+//    if(i==k)
+//        return T->data;
+//    i++;
+//    char ch;
+//    ch = PreNode(T->lChild,k);
+//    if (ch != '#')
+//        return ch;  //找到ch后一层层向上传
+//    ch = PreNode(T->rChild,k);
+//    return ch;  //右子树不管返回什么都原封不动返回
+//}
+//
+//int main()
+//{
+//    BiTree T;
+//    CreateBiTree(T);
+//    //find_k_value(T,3);
+//    char a = PreNode(T,3);
+//    cout << a <<endl;
+//}
+
+
+
+
+
+////T5.3.11
+////删除所有值为k的结点及子树
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreateBiTree(BiTree& T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if (ch == '#')
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreateBiTree(T->lChild);
+//        CreateBiTree(T->rChild);
+//    }
+//}
+//
+//typedef struct SqQueue{
+//    BiTNode*data[MaxSize];
+//    int front;
+//    int rear;
+//}SqQueue;
+//void InitQueue(SqQueue &Q)
+//{
+//    Q.front = Q.rear = 0;
+//}
+//bool EnQueue(SqQueue &Q,BiTree T)
+//{
+//    if((Q.rear+1)%MaxSize == Q.front)
+//        return false;
+//    Q.data[Q.rear] = T;
+//    Q.rear = (Q.rear+1)%MaxSize;
+//    return true;
+//}
+//bool DeQueue(SqQueue &Q,BiTree &T)
+//{
+//    if(Q.front == Q.rear)
+//        return false;
+//    T = Q.data[Q.front];
+//    Q.front = (Q.front+1)%MaxSize;
+//    return true;
+//}
+//void DelXTree(BiTree& T)
+//{
+//    if (T)
+//    {
+//        DelXTree(T->lChild);
+//        DelXTree(T->rChild);
+//        free(T);
+//    }
+//}
+//void find_x(BiTree& T, char x)
+//{
+//    SqQueue Q;
+//    InitQueue(Q);
+//    BiTNode* q = T;
+//    EnQueue(Q, q);
+//    while (Q.front != Q.rear)
+//    {
+//        DeQueue(Q, q);
+//        if (q->lChild)
+//        {
+//            if (q->lChild->data == x)
+//            {
+//                DelXTree(q->lChild);
+//                q->lChild = NULL;
+//            }
+//            else
+//            {
+//                EnQueue(Q, q->lChild);
+//            }
+//        }
+//        if (q->rChild)
+//        {
+//            if (q->rChild->data == x)
+//            {
+//                DelXTree(q->rChild);
+//                q->rChild = NULL;
+//            }
+//            else
+//            {
+//                EnQueue(Q, q->rChild);
+//            }
+//        }
+//    }
+//}
+//void LevelOrder(BiTree T)
+//{
+//    SqQueue Q;
+//    InitQueue(Q);
+//    BiTree q = T;
+//    EnQueue(Q, q);
+//    while(Q.front != Q.rear)
+//    {
+//        DeQueue(Q, q);
+//        cout << q->data << endl;
+//        if (q->lChild)
+//            EnQueue(Q,q->lChild);
+//        if (q->rChild)
+//            EnQueue(Q,q->rChild);
+//    }
+//}
+//int main()
+//{
+//    BiTree T;
+//    CreateBiTree(T);
+//    find_x(T, 'c');
+//    LevelOrder(T);
+//}
+
+
+////T5.3.12打印值为x结点的所有祖先
+////压栈后序
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+////栈的定义
+//typedef struct {
+//    BiTNode* data[MaxSize];
+//    int top;
+//}SqStack;
+//void InitStack(SqStack& S)
+//{
+//    S.top = -1;
+//}
+//bool Push(SqStack& S, BiTNode* x)
+//{
+//    if (S.top == MaxSize - 1)
+//        return false;
+//    S.data[++S.top] = x;
+//    return true;
+//}
+//bool Pop(SqStack& S, BiTNode*& x)
+//{
+//    if (S.top == -1)
+//        return false;
+//    x = S.data[S.top--];
+//    return true;
+//}
+//
+//void CreateBiTree(BiTree& T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if (ch == '#')
+//        T = NULL;
+//    else {
+//        T = (BiTree)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreateBiTree(T->lChild);
+//        CreateBiTree(T->rChild);
+//    }
+//}
+//
+//void findXParents(BiTree T,char x)
+//{
+//    SqStack S;
+//    InitStack(S);
+//    BiTNode* p = T, *r = NULL;
+//    while (p || S.top != -1)
+//    {
+//        if (p)
+//        {
+//            Push(S, p);
+//            p = p->lChild;
+//        }
+//        else {
+//            p = S.data[S.top];
+//            if (p->rChild && p->rChild != NULL)
+//            {
+//                p = p->rChild;
+//                Push(S, p);
+//                p = p->lChild;
+//            }
+//            else {
+//                Pop(S, p);
+//                if (p->data == x)
+//                {
+//                    while (S.top != -1)
+//                    {
+//                        Pop(S, p);
+//                        cout << p->data << endl;
+//                    }
+//                    exit(0);
+//                }
+//                r = p;
+//                p = NULL;
+//            }
+//        }
+//    }
+//}
+//int main()
+//{
+//    BiTNode* T;
+//    CreateBiTree(T);
+//    findXParents(T, 'd');
+//}
+
+
+
+
+
+//T5.3.13
+//补一下
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////T5.3.14
+////层次遍历
+////自己根据T5.3.5改的，标答不想看，有兴趣可以看下
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreatBiTree(BiTree& T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if (ch == '#')
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreatBiTree(T->lChild);
+//        CreatBiTree(T->rChild);
+//    }
+//}
+//typedef struct SqQueue {
+//    BiTNode* data[MaxSize];
+//    int front;
+//    int rear;
+//}SqQueue;
+//void InitQueue(SqQueue& Q)
+//{
+//    Q.front = Q.rear = 0;
+//}
+//bool EnQueue(SqQueue& Q, BiTree T)
+//{
+//    if ((Q.rear + 1) % MaxSize == Q.front)
+//        return false;
+//    Q.data[Q.rear] = T;
+//    Q.rear = (Q.rear + 1) % MaxSize;
+//    return true;
+//}
+//bool DeQueue(SqQueue& Q, BiTree& T)
+//{
+//    if (Q.front == Q.rear)
+//        return false;
+//    T = Q.data[Q.front];
+//    Q.front = (Q.front + 1) % MaxSize;
+//    return true;
+//}
+//int CulWidth(BiTree &T)
+//{
+//    SqQueue Q;
+//    InitQueue(Q);
+//    if (T == NULL)
+//        return 0;
+//    BiTree q = T;
+//    EnQueue(Q, q);
+//    int Count = 0, Max = 0, last = 1;
+//    while (Q.front != Q.rear)
+//    {
+//        DeQueue(Q, q);
+//        Count++;
+//        if (q->lChild)
+//            EnQueue(Q, q->lChild);
+//        if (q->rChild)
+//            EnQueue(Q, q->rChild);
+//        if (Q.front == last)
+//        {
+//            if (Count > Max)
+//                Max = Count;
+//            Count = 0;
+//            last = Q.rear;
+//        }
+//    }
+//    return Max;
+//}
+//int main()
+//{
+//    BiTree T;
+//    CreatBiTree(T);
+//    int max = CulWidth(T);
+//    cout << max << endl;
+//}
+
+
+////T5.3.15
+////满二叉树先序pre，求后序post
+////自己写的，和标答差不多
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+
+////每次把第一个移到最后一个，其他的向前移一位；   前（n-1）/2         和       除去前（n-1）/2和最后一个剩下的（n-1）/2     继续进行此函数
+//void getPost(char *pre /* 这里为什么不能用*&pre */ ,int from,int to,char *&post)
+//{
+//    if(from != to)
+//    {
+//        int n = (to-from)/2;
+//        char ch = pre[from];
+//        for(int i = from;i < to;i++)
+//            pre[i] = pre[i+1];
+//        pre[to] = ch;
+//        getPost(pre,from,from+n-1,post);
+//        getPost(pre,from+n,to-1,post);
+//    }
+//    else
+//        post = pre;
+//}
+//
+//int main()
+//{
+//    char  pre[7] = {'a','b','c','d','e','f','g'};
+//    char *post;
+//    getPost(pre,0,6,post);
+//    for(int i = 0;i < 7;i++)
+//        cout << post[i]<<endl;
+//}
+
+
+
+
+
+////T5.3.16
+////所有叶子节点从左到右形成单链，最左边是head
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreatBiTree(BiTree& T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if (ch == '#')
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreatBiTree(T->lChild);
+//        CreatBiTree(T->rChild);
+//    }
+//}
+//
+//typedef struct {
+//    BiTNode* data[MaxSize];
+//    int top;
+//}SqStack;
+//void InitStack(SqStack& S)
+//{
+//    S.top = -1;
+//}
+//bool Push(SqStack& S, BiTNode* x)
+//{
+//    if (S.top == MaxSize - 1)
+//        return false;
+//    S.data[++S.top] = x;
+//    return true;
+//}
+//bool Pop(SqStack& S, BiTNode*& x)
+//{
+//    if (S.top == -1)
+//        return false;
+//    x = S.data[S.top--];
+//    return true;
+//}
+//
+//////使用栈，自己写的
+////void LinkLeves(BiTree T, BiTree& head)
+////{
+////    SqStack S;
+////    InitStack(S);
+////    BiTree q = T, p = NULL;
+////    while (q || S.top != -1)
+////    {
+////        if (q)
+////        {
+////            Push(S, q);
+////            if (!(q->lChild || q->rChild)) //可以放在下面
+////            {
+////                if (p == NULL)
+////                    head = q;
+////                else
+////                    p->rChild = q;
+////                p = q;
+////            }
+////            q = q->lChild;
+////        }
+////        else {
+////            Pop(S, q);
+////            //上面的if代码可以放在这里
+////            q = q->rChild;
+////        }
+////    }
+////    p->rChild = NULL;  //这一句感觉没必要，叶子结点右子节点本来就是NULL
+////}
+//
+////答案，使用递归
+//BiTree head = NULL,pre = NULL;
+//void LinkLeves(BiTree T)
+//{
+//    if(T)
+//    {
+//        if(!(T->lChild ||T->rChild))
+//        {
+//            if(pre == NULL)
+//                head = T;
+//            else
+//                pre->rChild = T;
+//            pre = T;
+//        }
+//        LinkLeves(T->lChild);
+//        LinkLeves(T->rChild);
+//    }
+//}
+//
+//int main()
+//{
+//    BiTree T;
+//    CreatBiTree(T);
+//    LinkLeves(T);
+//    while (head != NULL)
+//    {
+//        cout << head->data << endl;
+//        head = head->rChild;
+//    }
+//}
+
+
+
+
+////T5.3.17
+////判断两个树是否相似
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreatBiTree(BiTree& T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if (ch == '#')
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreatBiTree(T->lChild);
+//        CreatBiTree(T->rChild);
+//    }
+//}
+//bool judge_same(BiTree T1,BiTree T2)
+//{
+//    if((T1 == NULL && T2 != NULL) || (T1 != NULL && T2 == NULL) )
+//        return false;
+//    else if(T1 == NULL && T2 ==NULL)
+//        return true;
+//    else
+//        return(judge_same(T1->lChild,T2->lChild) &&  judge_same(T1->rChild,T2->rChild) );
+//}
+//
+//int main()
+//{
+//    BiTree T1,T2;
+//    CreatBiTree(T1);
+//    CreatBiTree(T2);
+//    int a = judge_same(T1,T1);
+//    cout << a <<endl;
+//}
+
+
+
+
+
+////*********************************************//
+////中序线索二叉树*******************************//
+//typedef struct BiTNode {
+//    char data;
+//    int ltag;
+//    int rtag;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreatBiTree(BiTree& T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if (ch == '#')
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        T->ltag = T->rtag = 0;
+//        CreatBiTree(T->lChild);
+//        CreatBiTree(T->rChild);
+//    }
+//}
+//void InThread(BiTree& T, BiTree& pre)
+//{
+//    if (T)
+//    {
+//        InThread(T->lChild, pre);
+//        if (T->lChild == NULL)
+//        {
+//            T->lChild = pre;
+//            T->ltag = 1;
+//        }
+//        if (pre != NULL && pre->rChild == NULL)
+//        {
+//            pre->rChild = T;
+//            pre->rtag = 1;
+//        }
+//        pre = T;
+//        InThread(T->rChild, pre);
+//    }
+//}
+////找到中序线索二叉树的第一个结点
+//BiTree FirstNode(BiTree T)
+//{
+//    while (T->ltag == 0) T = T->lChild;
+//    return T;
+//}
+////找到二叉树的中p点的后继结点
+//BiTree NextNode(BiTree T)
+//{
+//    if (T->rtag == 1) return T->rChild;
+//    else return (FirstNode(T->rChild));
+//}
+////中序线索二叉树中序遍历
+//void InOrder(BiTree T)
+//{
+//    for (BiTree p = FirstNode(T); p != NULL; p = NextNode(p))
+//        cout << p->data << endl;
+//}
+//int main()
+//{
+//    BiTree T, pre = NULL, q;
+//    CreatBiTree(T);
+//    InThread(T, pre);
+//    pre->rChild = NULL;
+//    pre->rtag = 1;
+//    //q = NextNode(T);
+//    //cout << q->data <<endl;
+//    InOrder(T);
+//}
+
+
+
+
+//T5.3.18
+//四种情况：
+//1、有右子女就是有子女
+//2、无右子女右左子女是左子女
+//3、依次向上找父母，如果父母有左子女就是父母的左子女（如果父母的ltag为1就无左子女，父母的lChild就是父母的父母）
+//4、ltag为1，lChild不是父母而是NULL，或者到最上的父母ltag为1，lChild为NULL
+
+
+
+
+
+
+
+
+////T5.3.19
+////计算所有叶子节点带权路径之和
+//typedef struct BiTNode {
+//    int weight;
+//    BiTNode* left, * right;
+//}BiTNode, * BiTree;
+//void CreatBiTree(BiTree& T)
+//{
+//    int ch;
+//    cin >> ch;
+//    if (ch == -1)
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->weight = ch;
+//        CreatBiTree(T->left);
+//        CreatBiTree(T->right);
+//    }
+//}
+//typedef struct SqQueue {
+//    BiTNode* data[MaxSize];
+//    int front;
+//    int rear;
+//}SqQueue;
+//
+//////自己写的基于层次遍历，答案也有一个层次遍历，没看，感觉差不多
+////void InitQueue(SqQueue& Q)
+////{
+////    Q.front = Q.rear = 0;
+////}
+////bool EnQueue(SqQueue& Q, BiTree T)
+////{
+////    if ((Q.rear + 1) % MaxSize == Q.front)
+////        return false;
+////    Q.data[Q.rear] = T;
+////    Q.rear = (Q.rear + 1) % MaxSize;
+////    return true;
+////}
+////bool DeQueue(SqQueue& Q, BiTree& T)
+////{
+////    if (Q.front == Q.rear)
+////        return false;
+////    T = Q.data[Q.front];
+////    Q.front = (Q.front + 1) % MaxSize;
+////    return true;
+////}
+////int CulRoate(BiTree root)
+////{
+////    SqQueue Q;
+////    InitQueue(Q);
+////    BiTree q = root;
+////    int last= 1,WPL = 0,level = 0; //leve初始值为0，如果对应的层数的话就是1，但是带权路径为层数减一
+////    EnQueue(Q,q);
+////    while(Q.front != Q.rear)
+////    {
+////        DeQueue(Q,q);
+////        if(q->left)
+////            EnQueue(Q,q->left);
+////        if(q->right)
+////            EnQueue(Q,q->right);
+////        if(q->left == NULL && q->right == NULL) //这个if和下面的if的顺序 与 level、last的初始值要好好考虑
+////            WPL+=(level*q->weight);
+////        if(Q.front == last)
+////        {
+////            level++;
+////            last = Q.rear;
+////        }
+////    }
+////    return WPL;
+////}
+//
+//
+////递归,参照答案做了点改动
+//int wpl_PreOrder(BiTree root,int level) //level本意是层数，但是带权路径为层数减一
+//{
+//    if(root == NULL)
+//        return 0;
+//    if(root->left == NULL && root->right == NULL)
+//        return level*root->weight;
+//    else
+//        return (wpl_PreOrder(root->left,level+1)+wpl_PreOrder(root->right,level+1));
+//}
+//
+//
+//int main()
+//{
+//    BiTree root;
+//    CreatBiTree(root);
+//    int a = wpl_PreOrder(root,0);
+//    cout << a <<endl;
+//}
+
+
+
+
+
+
+////T5.3.20
+////转换中缀表达式
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreatBiTree(BiTree& T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if (ch == '#')
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreatBiTree(T->lChild);
+//        CreatBiTree(T->rChild);
+//    }
+//}
+//
+//void BtreeToExp(BiTree T,int level)
+//{
+//    if(T)
+//    {
+//        if(T->lChild==NULL && T->rChild==NULL)
+//            cout << T->data;
+//        else
+//        {
+//            if(level > 1)
+//                cout << '(';
+//            BtreeToExp(T->lChild,level+1);
+//            cout << T->data;
+//            BtreeToExp(T->rChild,level+1);
+//            if(level > 1)
+//                cout << ')';
+//        }
+//    }
+//}
+//void BTreeToE(BiTree root)
+//{
+//    BtreeToExp(root,1);
+//}
+//int main()
+//{
+//    BiTree T;
+//    CreatBiTree(T);
+//    BTreeToE(T);
+//
+//}
+
+
+
+//
+////T5.4.6
+////孩子兄弟表示法存储的叶子结点数
+////计算无子结点的结点数
+//typedef struct CSNode{
+//    char data;
+//    struct CSNode *firstchild,*nestsibling;
+//}CSNode ,*CSTree;
+//void CreatCSTree(CSTree &T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if(ch=='#')
+//        T = NULL;
+//    else{
+//        T = (CSNode*)malloc(sizeof(CSNode));
+//        T->data = ch;
+//        CreatCSTree(T->firstchild);
+//        CreatCSTree(T->nestsibling);
+//    }
+//}
+//int count_leaves(CSTree T)
+//{
+//    if(T == NULL)
+//        return 0;
+//    if(T->firstchild == NULL)
+//        return 1+count_leaves(T->nestsibling);
+//    else
+//        return count_leaves(T->firstchild)+count_leaves(T->nestsibling);
+//}
+//int main()
+//{
+//    CSTree T;
+//    CreatCSTree(T);
+//    int a = count_leaves(T);
+//    cout << a << endl;
+//}
+//
+
+
+
+
+
+////T5.4.7
+////计算孩子兄弟表示法深度
+//typedef struct CSNode{
+//    char data;
+//    struct CSNode *firstchild,*nestsibling;
+//}CSNode ,*CSTree;
+//void CreatCSTree(CSTree &T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if(ch=='#')
+//        T = NULL;
+//    else{
+//        T = (CSNode*)malloc(sizeof(CSNode));
+//        T->data = ch;
+//        CreatCSTree(T->firstchild);
+//        CreatCSTree(T->nestsibling);
+//    }
+//}
+//int culDeep(CSTree T)
+//{
+//    if(T==NULL)
+//        return 0;
+//    else
+//        return (culDeep(T->firstchild)+1)>culDeep(T->nestsibling) ? (culDeep(T->firstchild)+1) : culDeep(T->nestsibling);
+//}
+//int main()
+//{
+//
+//    CSTree T;
+//    CreatCSTree(T);
+//    int a = culDeep(T);
+//    cout << a << endl;
+//
+//}
+
+
+//T5.4.7
+//补一下
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////T5.5.6
+////判断二叉树是否二叉排序
+//typedef struct BiTNode {
+//    int data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreatBiTree(BiTree& T)
+//{
+//    int ch;
+//    cin >> ch;
+//    if (ch == -1)
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreatBiTree(T->lChild);
+//        CreatBiTree(T->rChild);
+//    }
+//}
+////自己写的，挺丑的
+//bool judge_sort(BiTree T)
+//{
+//    if(T == NULL)
+//        return true;
+//    if((T->lChild!=NULL&&T->lChild->data>=T->data)||(T->rChild!=NULL&&T->rChild->data<=T->data))
+//        return false;
+//    else
+//        return judge_sort(T->lChild)&&judge_sort(T->rChild);
+//}
+//int main()
+//{
+//    BiTree T;
+//    CreatBiTree(T);
+//    int a = judge_sort(T);
+//    cout << a <<endl;
+//}
+//
+
+
+
+
+////T5.5.8
+////判断是否为平衡树
+//typedef struct BiTNode {
+//    char data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreatBiTree(BiTree& T)
+//{
+//    char ch;
+//    cin >> ch;
+//    if (ch == '#')
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreatBiTree(T->lChild);
+//        CreatBiTree(T->rChild);
+//    }
+//}
+//int balence = 1;
+//int judge_balence(BiTree T)
+//{
+//    if(T == NULL)
+//    {
+//        balence *=1;
+//        return 0;
+//    }
+//    int l = judge_balence(T->lChild);
+//    int r = judge_balence(T->rChild);
+//    if(l>=r)
+//    {
+//        if(l-r < 2)
+//            balence *= 1;
+//        else
+//            balence*=0;
+//        return l+1;
+//    }
+//    else
+//    {
+//        if(r-l < 2)
+//            balence *=1;
+//        else
+//            balence*=0;
+//        return r+1;
+//    }
+//}
+//int main()
+//{
+//    BiTree T;
+//    CreatBiTree(T);
+//    int level = judge_balence(T);
+//    cout << level << "     " << balence <<endl;
+//}
+
+
+
+////T5.5.10
+////排序二叉树从大到小输出大于k的值
+//typedef struct BiTNode {
+//    int data;
+//    BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//void CreatBiTree(BiTree& T)
+//{
+//    int ch;
+//    cin >> ch;
+//    if (ch == -1)
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = ch;
+//        CreatBiTree(T->lChild);
+//        CreatBiTree(T->rChild);
+//    }
+//}
+////并不是只有前中后序，还可以自己设计顺序
+//void CoutBiggerK(BiTree T,int k)
+//{
+//    if(T == NULL)
+//        return;
+//    CoutBiggerK(T->rChild,k);
+//    if(T->data > k)
+//        cout << T->data <<endl;
+//    CoutBiggerK(T->lChild,k);
+//}
+//int main()
+//{
+//    BiTree T;
+//    CreatBiTree(T);
+//    CoutBiggerK(T,50);
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////T7.2.6
+////折半查找递归算法
+//typedef struct {
+//    int elem[MaxSize];
+//    int length;
+//}SSTable;
+//
+////递归
+//int BinSearch(SSTable ST, int key, int low, int high)
+//{
+//    if (low > high)
+//        return 0;
+//    int mid = (low + high) / 2;
+//    if (ST.elem[mid] == key)
+//        return mid;
+//    if (ST.elem[mid] > key)
+//        BinSearch(ST, key, low, mid - 1);
+//    else
+//        BinSearch(ST, key, mid + 1, high);
+//}
+////非递归
+//int BinSearch2(SSTable ST, int key)
+//{
+//    int low = 1,high = ST.length,mid;
+//
+//    while(low <= high)
+//    {
+//        mid = (low+high)/2;
+//        if(ST.elem[mid] == key)
+//            return mid;
+//        if(ST.elem[mid] > key)
+//            high  = mid-1;
+//        else
+//            low = mid +1;
+//    }
+//    return -1;
+//}
+//int main()
+//{
+//    SSTable ST;
+//    ST.length = MaxSize - 1;
+//    for (int i = 0; i < MaxSize; i++)
+//    {
+//        ST.elem[i] = i;
+//    }
+//    int a = BinSearch2(ST, 5);
+//    cout << a << endl;
+//}
+
+
+
+
+////T8.3.2
+////冒泡
+//void BubbleSort(int A[], int n)
+//{
+//    for (int i = 0; i < n-1; i++)
+//        for (int j = 0; j < n-i-1; j++)
+//        {
+//            if (A[j] > A[j + 1])
+//            {
+//                int temp = A[j];
+//                A[j] = A[j + 1];
+//                A[j + 1] = temp;
+//            }
+//        }
+//}
+////双向冒泡
+//void DoubleBubble(int A[], int n)
+//{
+//
+//    for (int i = 0; i < n / 2; i++)
+//    {
+//        for (int j = i; j < n -i - 1; j++)
+//        {
+//            if(A[j] > A[j+1])
+//            {
+//                int temp = A[j];
+//                A[j] = A[j + 1];
+//                A[j + 1] = temp;
+//            }
+//        }
+//        for (int k = n - 1 - i; k > i; k--)
+//        {
+//            if (A[k] < A[k - 1])
+//            {
+//                int temp  = A[k];
+//                A[k] = A[k -1];
+//                A[k - 1] = temp;
+//            }
+//        }
+//
+//    }
+//}
+//
+//int main()
+//{
+//    int A[10] = { 9,8,7,6,5,4,3,2,1,0};
+//    DoubleBubble(A, 10);
+//    for (int i = 0; i < 10; i++)
+//        cout << A[i] << endl;
+//}
+
+
+
+
+
+////T8.3.2
+////奇数放在偶数前面
+//void swap(int &a, int &b)
+//{
+//    int temp = a;
+//    a = b;
+//    b = temp;
+//}
+//void sort(int A[], int n)
+//{
+//    int i = 0;
+//    int j = n - 1;
+//    while (i < j)
+//    {
+//        while (A[i] % 2 != 0)
+//            i++;
+//        while (A[j] % 2 == 0)
+//            j--;
+//        swap(A[i], A[j]);
+//        i++, j--;
+//
+//    }
+//}
+//
+//int main()
+//{
+//    int A[10] = { 9,8,7,6,5,4,3,2,1,0 };
+//    sort(A, 10);
+//    for (int i = 0; i < 10; i++)
+//        cout << A[i] << endl;
+//}
+//
+
+
+
+
+
+//void QuickSort(int A[], int low ,int high)
+//{
+//	int pre = A[low];
+//	int i = low, j = high;
+//	while (i < j)
+//	{
+//		while ((A[j] > pre)&&i<j)
+//			j--;
+//		A[i] = A[j];
+//		while ((A[i] < pre) && i<j)
+//			i++;
+//		A[j] = A[i];
+//	}
+//	A[i] = pre;
+//	QuickSort(A, low, i - 1);
+//	QuickSort(A, i + 1, high);
+//}
+//int main()
+//{
+//    int A[10] = { 9,8,7,6,5,4,3,2,1,0 };
+//	QuickSort(A,0, 9);
+//    for (int i = 0; i < 10; i++)
+//        cout << A[i] << endl;
+//}
+
+
+
+////T8.3.6
+////小的一半在前，大的一半在后
+//void SeperateTwo(int A[],int n)
+//{
+//    int low1 ,low = 0,high1 ,high = n-1,temp,tag = 1;
+//    while(tag)
+//    {
+//        temp = A[low];
+//        low1 = low,high1 = high;
+//        while(low1 < high1)
+//        {
+//            while (A[high1] > temp  &&  low1 < high1) high1--;
+//            A[low1] = A[high1];
+//            while (A[low1] < temp  &&  low1 < high1) low1++;
+//            A[high1] = A[low1];
+//        }
+//        A[low1] = temp;
+//        if(low1 == n/2-1)
+//            tag = 0;
+//        if(low1 <n/2-1)
+//        {
+//            low = low1+1;
+//        }
+//        else
+//            high = high1-1;
+//    }
+//}
+//int main()
+//{
+//    int A[10] = { 3,0,4,2,6,5,1,8,7,9 };
+//	SeperateTwo(A,10);
+//    for (int i = 0; i < 10; i++)
+//        cout << A[i] << endl;
+//}
+
+
+
+
+
+////T8.5.7
+////排成RYB顺序
+//void RYB(char A[],int n)
+//{
+//    int i = 0,j = 0,k=n-1;
+//    for(j; j <n;j++)
+//    {
+//        if(A[j]=='R')
+//        {
+//            char temp = A[i];
+//            A[i] = A[j];
+//            A[j] = temp;
+//            i++;
+//        }
+//    }
+//    for(j=i;j <k;j++) //如果为蓝色必须考虑A[k]是否为B
+//    {
+//        if(A[k]=='B')
+//        {
+//            k--;
+//            j--;   //抵消j++
+//        }
+//        if(A[j]=='B' && A[k]!='B')
+//        {
+//            char temp = A[k];
+//            A[k] = A[j];
+//            A[j] = temp;
+//            k--;
+//        }
+//
+//    }
+//}
+//
+//int main()
+//{
+//    char A[10] = {'R','B','B','B','Y','Y','Y','R','R','B'};
+//	RYB(A,10);
+//    for (int i = 0; i < 10; i++)
+//        cout << A[i] << endl;
+//}
+
+
+
+
+
+
+//T8.4.4
+//链表简单选择排序
+////带头结点的单链表
+typedef struct LNode
 {
-    Strack* st;
-    st = (Strack*)malloc(sizeof(Strack));
-    st->top = -1;
-    double val0 = 1;
-    double val1 = 2 * x;
-    st->data[0] = 1;
-    st->data[1] = 2 * x;
-    st->top = 2;
-    while (st->top < n + 1)
-    {
-        st->data[st->top] = 2 * x * val1 - 2 * (st->top - 1) * val0;
-        st->data[st->top] == 0 ? 0 : st->data[st->top]; //避免输出-0
-        val0 = val1;
-        val1 = st->data[st->top];
-        st->top++;
-    }
-    if (n == 0)
-        cout << 0 << endl;
-    else if (n == 1)
-        cout << 2 * x << endl;
-    else
-        cout << st->data[n] << endl;
-    cout << (-0 == 0) << endl;
-}
+    int data;
+    struct LNode* next;
+}LNode;
 
+//创建带头结点的链表
+void create_Link(LNode*& L, int x)
+{
+    L = (LNode*)malloc(sizeof(LNode));
+    LNode* p, * a = L;
+    while (x > 0)
+    {
+        p = (LNode*)malloc(sizeof(LNode));
+        cin >> p->data;
+        p->next = NULL;
+        a->next = p;
+        a = p;
+        x--;
+    }
+}
+void SelectSort(LNode*& L)
+{
+    LNode* p, * pre, * q, * maxp, * maxpre;
+    q = (LNode*)malloc(sizeof(LNode));
+    q->next = L->next;
+    L->next = NULL;
+    while (q->next != NULL)
+    {
+        pre = q;
+        p = q->next;
+        maxp = p;
+        maxpre = pre;
+        while (p != NULL)
+        {
+            if (p->data > maxp->data)
+            {
+                maxp = p;
+                maxpre = pre;
+            }
+            pre = p;
+            p = p->next;
+        }
+        maxpre->next = maxp->next;
+        maxp->next = L->next;
+        L->next = maxp;
+
+
+    }
+    free(q);
+}
+//递归输出
+void print_Link(LNode*& L)
+{
+    if (L->next == NULL)
+        return;
+    else
+        cout << L->next->data << endl;
+    print_Link(L->next);
+
+}
 
 int main()
 {
-    calculate_p(4, 0);
+    LNode* L;
+    create_Link(L, 10);
+    SelectSort(L);
+    print_Link(L);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
