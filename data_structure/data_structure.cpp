@@ -114,7 +114,7 @@ using namespace std;
 //    {
 //        p = (CLNode*)malloc(sizeof(CLNode));
 //        cin >> p->data;
-//        if(x == 1)
+//        if(x == 1)                                //这句话可以不要
 //            p->next = CL;
 //        a->next = p;
 //        a = p;
@@ -277,7 +277,6 @@ using namespace std;
 //{
 //    int data[MaxSize];
 //    int length = Length;
-//    int maxSize = MaxSize;
 //}sqList;
 //
 //int setoutMin(sqList &List)
@@ -465,7 +464,7 @@ using namespace std;
 
 
 ////T2.3.7
-////有序表删除（s,t）的元素
+////合并两个有序顺序表
 //typedef struct sqList{
 //    int data[MaxSize];
 //    int length = Length/2;
@@ -476,7 +475,7 @@ using namespace std;
 //}sqList2;
 //
 //
-//contract(sqList2 &List,sqList List1,sqList List2)
+//void contract(sqList2 &List,sqList List1,sqList List2)
 //{
 //    int num1 = 0, num2 =0,i;
 //    for (i = 0;num1 < List1.length&&num2 <List2.length;i++)
@@ -506,7 +505,7 @@ using namespace std;
 //        cout<< List.data[i] << endl ;
 //    cout <<endl << List.length<<endl;
 //}
-//
+
 
 
 
@@ -552,7 +551,7 @@ using namespace std;
 
 
 
-//
+
 ////T2.2.9
 ////有序顺序表找到x并与后一个元素换位，否则插入(折半查找)
 //typedef struct sqList{
@@ -583,9 +582,9 @@ using namespace std;
 //    if(low>high )  //查找不到的话在high和low之间即在high的下一个
 //    {
 //        int i;
-//        for (i = List.length-1;i>high;i--)
-//            List.data[i+1] = List.data[i];
-//        List.data[i+1] = x;
+//        for (i = List.length;i>low;i--)
+//            List.data[i] = List.data[i-1];
+//        List.data[i] = x;
 //    }
 //}
 //
@@ -604,6 +603,63 @@ using namespace std;
 //    for(int i = 0;i<List.length;i++)
 //        cout<< List.data[i] << endl ;
 //    cout <<endl << List.length<<endl;
+//}
+
+
+////T2.2.11
+////两个顺序线性表的中位数
+//typedef struct sqList {
+//	int* data;
+//	int length = Length;
+//	int max = MaxSize;
+//}sqList;
+//int searchMid(sqList L1, sqList L2)
+//{
+//	int from1 = 0, from2 = 0, to1 = L1.length - 1, to2 = L2.length - 1, mid1, mid2;
+//	while (from1!=to1 || from2 != to2)
+//	{
+//		mid1 = (from1 + to1) / 2;
+//		mid2 = (from2 + to2) / 2;
+//		if (L1.data[mid1] == L2.data[mid2])
+//			return	L1.data[mid1];
+//		else if (L1.data[mid1] < L2.data[mid2] && (to1-from1+1)%2 == 0)
+//		{
+//			from1 = mid1 + 1;
+//			to2 = mid2;
+//		}
+//		else if (L1.data[mid1] < L2.data[mid2] && (to1 - from1 + 1) % 2 == 1)
+//		{
+//			from1 = mid1;
+//			to2 = mid2;
+//		}
+//		else if (L1.data[mid1] > L2.data[mid2] && (to2 - from2 + 1) % 2 == 0)
+//		{
+//			from2 = mid2 + 1;
+//			to1 = mid1;
+//		}
+//		else if (L1.data[mid1] > L2.data[mid2] && (to2 - from2 + 1) % 2 == 1)
+//		{
+//			from2 = mid2;
+//			to1 = mid1;
+//		}
+//	}
+//	return L1.data[from1] <= L2.data[from2] ? L1.data[from1] : L2.data[from2];
+//}
+//int main()
+//{
+//	sqList L1, L2;
+//	L1.data = (int*)malloc(sizeof(int) * L1.max);
+//	L2.data = (int*)malloc(sizeof(int) * L2.max);
+//	for (int i = 0; i < L1.length; i++)
+//	{
+//		L1.data[i] = i * 2 + 1;
+//	}
+//	for (int j = 0; j < L2.length; j++)
+//	{
+//		L2.data[j] = j * 2;
+//	}
+//	int a = searchMid(L1, L2);
+//	cout << a << endl;
 //}
 
 
@@ -666,7 +722,8 @@ using namespace std;
 
 
 
-
+////T2.2.13
+////找到未出现的最小正整数
 //int FindLossMin(int A[],int n)
 //{
 //    int *B,i;
@@ -674,7 +731,7 @@ using namespace std;
 //    memset(B,0,sizeof(int)*(n+1));
 //    for (i = 0;i < n;i++)
 //    {
-//        if(A[i] <= n &&A[i] > 0)
+//        if(A[i] <= n && A[i] > 0)
 //            B[A[i]-1] = A[i];
 //    }
 //
@@ -685,7 +742,6 @@ using namespace std;
 //            cout << i<< endl;
 //            return i+1;
 //        }
-//
 //    }
 //}
 //int main()
@@ -743,9 +799,9 @@ using namespace std;
 //{
 //    LNode *L;
 //    setup_LNode(L);
-//
 //    del_x(L,3);
-//    LNode *x = L;
+//    LNode *x = L;	2
+
 //    while(x)
 //    {
 //        cout << x->data <<endl;
@@ -930,6 +986,63 @@ using namespace std;
 //*************************************************************//
 
 
+////T2.3.1
+////删除不带头结点的单链表为x的值
+//typedef struct LNode
+//{
+//	int data;
+//	LNode* next;
+//}LNode;
+//void creat_Link(LNode* &L, int x)
+//{
+//	L = (LNode*)malloc(sizeof(LNode));
+//	cin >> L->data;
+//	x--;
+//	LNode* q = L, * p;
+//	while (x>0)
+//	{
+//		p = (LNode*)malloc(sizeof(LNode));
+//		cin >> p->data;
+//		q->next = p;
+//		q = p;
+//		x--;
+//	}
+//	q->next = NULL;
+//}
+//void del_x(LNode*& L, int x)
+//{
+//	if (L->next == NULL)
+//		return;
+//	if (L->data == x)
+//	{
+//		LNode* p = L;
+//		L = L->next;
+//		free(p);
+//		del_x(L,x);
+//	}
+//	else
+//		del_x(L->next,x);
+//}
+//void print_link(LNode* L)
+//{
+//	LNode* a = L;
+//	while(a != NULL)
+//	{
+//		cout << a->data << endl;
+//		a = a->next;
+//	}
+//}
+//int main()
+//{
+//	LNode* L;
+//	creat_Link(L, 5);
+//	del_x(L, 3);
+//	print_link(L);
+//}
+
+
+
+
 ////T2.3.2
 ////带头结点L删除所有x
 //
@@ -987,7 +1100,7 @@ using namespace std;
 //{
 //    LNode *pre = L,*a = L->next,*p;
 //    while(a != NULL)
-//    {
+//    {	
 //        if(a->data == x)
 //        {
 //            p = a;
@@ -998,7 +1111,6 @@ using namespace std;
 //            pre = a;
 //        a = pre->next;
 //    }
-//
 //}
 //
 //int main()
@@ -1014,7 +1126,7 @@ using namespace std;
 
 
 
-////T2.3.2
+////T2.3.3
 ////带头结点L删除所有x
 //
 //typedef struct LNode
@@ -1049,6 +1161,15 @@ using namespace std;
 //    cout << L->next->data << endl;
 //}
 //
+//////答案，会输出头结点的值（不存在）
+////void reverse_print(LNode*& L)
+////{
+////    if (L->next != NULL)
+////        reverse_print(L->next);
+////    if(L!=NULL)
+////        cout << L ->data << endl;
+////}
+//
 //int main()
 //{
 //    LNode *L;
@@ -1059,7 +1180,7 @@ using namespace std;
 
 
 
-////T2.3.3
+////T2.3.4 
 ////带头结点L删除最小值节点
 //
 //typedef struct LNode
@@ -1095,34 +1216,43 @@ using namespace std;
 //            minnum = a->data;
 //            minptr = a;
 //            minpre = pre;
-//            a = a->next;
-//
 //        }
 //        pre = a;
 //        a = a->next;
 //    }
-//    minpre->next = minptr;
+//    minpre->next = minptr -> next;
 //    free(minptr);
 //    return minnum;
 //}
 //
+////递归输出
+//void print_Link(LNode *&L)
+//{
+//    if(L->next == NULL)
+//        return;
+//    else
+//        cout << L->next->data << endl;
+//    print_Link(L->next);
+//
+//}
 //int main()
 //{
 //    LNode *L;
 //    create_Link(L,5);
 //    int a = del_min(L);
-//    cout << "The Minimum Number Is:" << a << endl;
+//    cout << "The Minimum Number Is:" << a << endl << endl;
+//    print_Link(L);
 //}
 
 
 //
-////2.3.4
+////2.3.5
 ////带头结点单链表逆置（头插法）
 //typedef struct LNode
 //{
 //    int data;
 //    struct LNode *next;
-//}LNode;
+//}LNode; 
 //
 ////创建带头结点的链表
 //void create_Link(LNode *&L,int x)
@@ -1263,11 +1393,34 @@ using namespace std;
 //    }
 //}
 //
+//void Sort3(LNode*& L)
+//{
+//    LNode* p, * q = L->next, * a;
+//    L->next = NULL;
+//    while (q != NULL)
+//    {
+//        p = q;
+//        q = p->next;
+//        a = L;
+//        while (a->next != NULL)
+//        {
+//            if (a->next->data <= p->data)
+//                a = a->next;
+//            else                     //和上面的区别在于要加break
+//                break;
+//        }
+//        p->next = a->next;
+//        a->next = p;
+//
+//    }
+//
+//}
+//
 //int main()
 //{
 //    LNode *L;
 //    create_Link(L,5);
-//    Sort2(L);
+//    Sort3(L);
 //    print_Link(L);
 //}
 
@@ -1276,7 +1429,7 @@ using namespace std;
 
 
 ////T2.3.8
-////带头结点单链使其递增
+////两个单链表找到公共结点
 //typedef struct LNode
 //{
 //    int data;
@@ -1343,7 +1496,7 @@ using namespace std;
 //        b = b->next;
 //    }
 //    if(a == NULL)
-//        return false;
+//        return NULL;
 //}
 //
 //int main()
@@ -1355,6 +1508,8 @@ using namespace std;
 //    LNode *a = Find_same(L1,L2);
 //    cout << a->data <<endl;
 //}
+
+
 
 
 
@@ -1390,55 +1545,39 @@ using namespace std;
 //    else
 //        cout << L->next->data << endl;
 //    print_Link(L->next);
-//
-//}
-//
-////计算有多少节点
-//int count_Link(LNode *L)
-//{
-//    if (L == NULL)
-//        return 0; //由于包含头结点，计算结果包括头结点
-//    else
-//        return count_Link(L->next)+1;
 //}
 //
 //LNode *seperate(LNode *&L)
 //{
-//    LNode *L2,*a = L->next,*pre = L,*ptr2;
+//    LNode *L2,*pre = L,*ptr2;
 //    L2 = (LNode*)malloc(sizeof(LNode));
-//    L2->next = NULL;
 //    ptr2 = L2;
-//    for(int i = 1;a!=NULL;i++)
+//    for(int i = 1;pre->next!=NULL;i++)
 //    {
 //        if(i%2 == 0)
 //        {
-//            pre->next = a->next;
-//            a->next = ptr2->next;
-//            ptr2->next = a;
+//            ptr2->next = pre->next;
+//            pre->next = pre->next->next;
 //            ptr2 = ptr2->next;
-//            a = pre->next;
 //        }
 //        else
 //        {
 //            pre = pre->next;
-//            a = a->next;
 //        }
-//
-//
 //    }
+//    ptr2->next = NULL;
 //    return L2;
 //}
 //
 //int main()
 //{
 //    LNode *L,*L2;
-//    create_Link(L,5);
+//    create_Link(L,6);
 //    L2 = seperate(L);
 //    cout << "L1: "<<endl;
 //    print_Link(L);
 //    cout<< "L2"<<endl;
 //    print_Link(L2);
-//
 //}
 
 
@@ -1477,14 +1616,13 @@ using namespace std;
 //    else
 //        cout << L->next->data << endl;
 //    print_Link(L->next);
-//
 //}
-//
 //
 //void combine(LNode *&L1,LNode *&L2)
 //{
-//    LNode *a1 = L1->next,*a2 = L2->next,*r1 = a1,*r2;
+//    LNode *a1 = L1->next,*a2 = L2->next,*r1,*r2;
 //    L1->next = NULL;
+//    free(L2);
 //    while(a1!=NULL && a2 != NULL)
 //    {
 //        if(a1->data < a2->data)
@@ -1559,51 +1697,9 @@ using namespace std;
 //    if(L->next == NULL)
 //        return;
 //    else
-//
-//
-//
-//LNode* find_same(LNode *&L1,LNode *&L2)
-//{
-//    LNode *C,*a1 = L1->next,*b1 = L2->next,*c1;
-//    C = (LNode*)malloc(sizeof(LNode));
-//    c1 = C;
-//    while(a1 != NULL && b1 != NULL)
-//    {
-//        if(a1->data < b1->data)
-//            a1 = a1->next;
-//        else if(a1->data > b1->data)
-//            b1 = b1->next;
-//        else
-//        {
-//            LNode *s;
-//            s = (LNode*)malloc(sizeof(LNode));
-//            s->data = a1->data;
-//
-//            c1 ->next = s;
-//            c1 = c1->next;
-//            a1 = a1->next;
-//            b1 = b1->next;
-//        }
-//    }
-//    c1->next = NULL; //保证新链表最后一个结点指向NULL
-//    return C;
-//
-//}
-//
-//int main()
-//{
-//    LNode *A,*B,*C;
-//    create_Link(A,5);
-//    create_Link(B,6);
-//    C = find_same(A,B);
-//    print_Link(C);
-//}
-//
-//      cout << L->next->data << endl;
+//        cout << L->next->data << endl;
 //    print_Link(L->next);
-//
 //}
-//
 //
 //LNode* find_same(LNode *&L1,LNode *&L2)
 //{
@@ -1796,6 +1892,8 @@ using namespace std;
 
 
 
+
+
 ////T2.3.17
 ////头结点循环双链表是否对称
 //typedef struct DLNode
@@ -1904,7 +2002,7 @@ using namespace std;
 //        minnum = p->data;
 //        while(p != CL)
 //        {
-//            if(p -> data < minnum) //这里的minnum可以用minp->data代替，可以少一个变量
+//            if(p -> data < minnum) //这里的minnum可以用minp->data代替，可以少一个整形变量
 //            {
 //                minnum = p->data;
 //                minpre = pre;
@@ -1931,7 +2029,7 @@ using namespace std;
 
 
 ////T2.3.20
-////有表头双向单链表结点有个访问频度域的值（freq），初始为0，没进行一次操作Locate(L,x)，所有值为x的结点freq值加一并排在同等频度结点前面
+////有表头非循环双向链表结点有个访问频度域的值（freq），初始为0，没进行一次操作Locate(L,x)，所有值为x的结点freq值加一并排在同等频度结点前面
 ////思想：从前往后遍历，直到结尾，找到值为x的结点,一定是向前移位的
 //////创建带头结点的循环双链表
 //typedef struct DLNode
@@ -2012,6 +2110,61 @@ using namespace std;
 
 
 
+
+////自己写的递归，答案的方法更好
+////T2.3.21
+////带头单链输出倒数第k个数
+//typedef struct LNode
+//{
+//    int data;
+//    struct LNode *next;
+//}LNode;
+//
+////创建带头结点的链表
+//void create_Link(LNode *&L,int x)
+//{
+//    L = (LNode*)malloc(sizeof(LNode));
+//    LNode *p,*a = L;
+//    while(x>0)
+//    {
+//        p = (LNode*)malloc(sizeof(LNode));
+//        cin >> p->data;
+//        p->next = NULL;
+//        a->next = p;
+//        a = p;
+//        x--;
+//    }
+//}
+//
+//int K = 3;                              //可以这里设置全局变量
+//bool cout_k(LNode *L1,int k)
+//{
+//    static int x = k;                   //也可以这里设置static，不知道考试可不可以用static 
+//    if (L1 == NULL)
+//        return 0;
+//    else
+//    {
+//        int a = cout_k(L1->next, k);
+//        x--;
+//        if (x == 0)
+//        {
+//            cout << L1->data << endl;
+//            a = 1;
+//        }
+//        return a;
+//    }
+//}
+//
+//int main()
+//{
+//    LNode* A;
+//    int k = 8;
+//    cout << "Input A:" <<endl;
+//    create_Link(A,6);
+//    bool a = cout_k(A,k);
+//    cout << endl << "The Result Is:" <<endl<< a <<endl;
+//}
+//
 
 
 
@@ -2162,6 +2315,83 @@ using namespace std;
 
 
 
+//
+////自己写的
+////T2.3.23
+////带头单链保留绝对值相同的第一个数（时间复杂度尽可能好）,绝对值小于等于n
+//typedef struct LNode
+//{
+//    int data;
+//    struct LNode *next;
+//}LNode;
+//
+////创建带头结点的链表
+//void create_Link(LNode *&L,int x)
+//{
+//    L = (LNode*)malloc(sizeof(LNode));
+//    LNode *p,*a = L;
+//    while(x>0)
+//    {
+//        p = (LNode*)malloc(sizeof(LNode));
+//        cin >> p->data;
+//        p->next = NULL;
+//        a->next = p;
+//        a = p;
+//        x--;
+//    }
+//}
+//
+//void del_same(LNode *L1,int n)
+//{
+//    int* data;
+//    data = (int*)malloc(sizeof(int) * (n+1));
+//    for (int i = 0; i < n+1; i++)
+//        data[i] = 0;
+//    LNode* pre = L1, * q;
+//    while (pre->next != NULL)
+//    {
+//        q = pre->next;
+//        int temp = q->data >= 0 ? q->data : -q->data;
+//        if (data[temp] == 0)
+//        {
+//            data[temp] = 1;
+//            pre = pre->next;
+//        }
+//        else
+//        {
+//            pre->next = q->next;
+//            free(q);
+//        }
+//    }
+//    free(data);                 //借用空间别忘了释放
+//}   
+//
+////递归输出
+//void print_Link(LNode *&L)
+//{
+//    if(L->next == NULL)
+//        return;
+//    else
+//        cout << L->next->data << endl;
+//    print_Link(L->next);
+//}
+//
+//int main()
+//{
+//    LNode* A;
+//    int k = 8;
+//    cout << "Input A:" <<endl;
+//    create_Link(A,10);
+//    del_same(A,10);
+//    print_Link(A);
+//}
+
+
+
+
+
+
+
 
 ////T2.3.23
 ////查找带头结点单链表绝对值相等的数，只保留第一个，时间复杂度尽可能高效
@@ -2221,7 +2451,7 @@ using namespace std;
 //        }
 //        p = pre->next;
 //    }
-//
+//    free(num);               //要释放      
 //}
 //
 //int main()
@@ -2248,9 +2478,99 @@ using namespace std;
 
 
 
-
-
-
+////自己写的
+////T3.3.25
+////头结点单链表（a1,a2.......an）变成 （a1,an,a2,an-1.....）
+////先找到中间结点，后半段逆置，前后两段依次插入
+//typedef struct LNode
+//{
+//    int data;
+//    struct LNode *next;
+//}LNode;
+//
+////创建带头结点的链表
+//void create_Link(LNode *&L,int x)
+//{
+//    L = (LNode*)malloc(sizeof(LNode));
+//    LNode *p,*a = L;
+//    while(x>0)
+//    {
+//        p = (LNode*)malloc(sizeof(LNode));
+//        cin >> p->data;
+//        p->next = NULL;
+//        a->next = p;
+//        a = p;
+//        x--;
+//    }
+//}
+//
+////递归输出
+//void print_Link(LNode*& L)
+//{
+//    if (L->next == NULL)
+//        return;
+//    else
+//        cout << L->next->data << endl;
+//    print_Link(L->next);
+//}
+//
+//void reverse(LNode *L1)
+//{
+//    //先找到中间结点，两个指针，一个每次走一步，一个两步
+//    LNode* p1 = L1, * p2 = L1, * q;
+//    while (p2->next != NULL)
+//    {
+//        p1 = p1->next;
+//        p2 = p2->next;
+//        if (p2->next != NULL)
+//            p2 = p2->next;
+//    }
+//    q = p1;      //保存中间点的位置，后半部分逆序
+//    p1 = p1->next;
+//    q->next = NULL;
+//    while (p1 != NULL)
+//    {
+//        p2 = p1->next;
+//        p1->next = q->next;
+//        q->next = p1;
+//        p1 = p2;
+//    }
+//
+//    //两段交替尾插法
+//    p1 = L1->next;    //前一段的头
+//    p2 = q->next;     //后一段的头
+//    q->next = NULL;  //断链很重要
+//    q = L1;           //生成链的头
+//    int i = 1;
+//    while (p1 != NULL || p2 != NULL)   //这里直接用或就行了
+//    {
+//        if (i % 2 == 1)
+//        {
+//            q->next = p1;
+//            p1 = p1->next;
+//        }
+//        else
+//        {
+//            q->next = p2;
+//            p2 = p2->next;
+//        }
+//        i++;
+//        q = q->next;
+//    }
+//    
+//    q->next = NULL;
+//
+//}
+//
+//int main()
+//{
+//    LNode* A;
+//    int k = 8;
+//    cout << "Input A:" <<endl;
+//    create_Link(A,9);
+//    reverse(A);
+//    print_Link(A);
+//}
 
 
 
@@ -2313,7 +2633,7 @@ using namespace std;
 //    q = p->next;
 //    p->next = NULL;
 //    p = L->next;
-//    L->next = NULL;
+//    L->next = NULL; 
 //    r = L;
 //    while(p != NULL) //这里用的尾插法轮流插入头结点所组成的链最后面，标答是第二个链插入第一个链对应位置
 //    {
@@ -2447,51 +2767,6 @@ using namespace std;
 //    if (L->next == NULL)
 //        return;
 //    else
-//{
-//    L = (LNode*)malloc(sizeof(LNode));
-//    LNode* p, * a = L;
-//    while (x > 0)
-//    {
-//        p = (LNode*)malloc(sizeof(LNode));
-//        cin >> p->data;
-//        p->next = NULL;
-//        a->next = p;
-//        a = p;
-//        x--;
-//    }
-//}
-//
-//bool judge_symmetry(LNode*&L,int n)
-//{
-//    LNode *p;
-//    char Stract[n/2];
-//    int top = -1;
-//    p = L->next;
-//    for(int i = 0;i < n/2;i++)
-//    {
-//        Stract[++top] =  p->data;
-//        p = p->next;
-//    }
-//    if(n%2 == 1)
-//        p = p->next;
-//    while(top > -1 )
-//    {
-//        if(Stract[top--] != p->data)
-//            return false;
-//        p = p->next;
-//    }
-//    return true;
-//}
-//
-//int main()
-//{
-//    LNode* L;
-//    create_Link(L, 8);
-//    bool a = judge_symmetry(L,8);
-//    cout << a << endl << endl;
-//    print_Link(L);
-//
-//}
 //        cout << L->next->data << endl;
 //    print_Link(L->next);
 //}
@@ -2551,7 +2826,7 @@ using namespace std;
 ////T3.2.1
 ////循环队列 tag标志，front，rear，入队、出队算法
 //typedef struct sqQueue {
-//    int data[MaxSize];  //结构体内不能直接赋值
+//    int data[MaxSize];  //结构体内不能直接赋值？
 //    int Front;
 //    int Rear;
 //    int tag;
@@ -2588,8 +2863,83 @@ using namespace std;
 
 
 
+////自己写的
+////T3.3.1
+////判断字符串的括号是否配对以“/0”结束
+//typedef struct Strack {
+//    char data[MaxSize];
+//    int top = -1;
+//    int max = MaxSize;
+//}SqStrack;
+//bool push(SqStrack& S, char& a)
+//{
+//    if (S.top == S.max - 1)
+//        return false;
+//    else
+//    {
+//        S.data[++S.top] = a;
+//        return true;
+//    }
+//}
+//bool pop(SqStrack& S, char& a)
+//{
+//    if (S.top == -1)
+//        return false;
+//    else
+//    {
+//        a = S.data[S.top--];
+//        return true;
+//    }
+//}
+//bool judge_brackets(char *a)
+//{
+//    SqStrack S;
+//    char x;
+//    for (int i = 0; a[i] != '\0'; i++)
+//    {
+//        if (a[i] == '(' || a[i] == '[' || a[i] == '{')
+//        {
+//            push(S, a[i]);
+//        }
+//        else if (a[i] == ')')
+//        {
+//            pop(S, x);
+//            if (x == '(')
+//                continue;
+//            return false;
+//        }
+//        else if (a[i] == ']')
+//        {
+//            pop(S, x);
+//            if (x == '[')
+//                continue;
+//            return false;
+//        }
+//        else if (a[i] == '}')
+//        {
+//            pop(S, x);
+//            if (x == '{')
+//                continue;
+//            return false;
+//        }
+//    }
+//    if (S.top == -1)
+//        return true;
+//    else
+//        return false;
+//}
+//int main()
+//{
+//    
+//    char a[] = { "{he(ll}o)" };
+//    bool judge = judge_brackets(a);
+//    cout << judge << endl;
+//    return 0;
+//}
 
 
+
+//
 ////T3.3.3
 ////用栈实现递归（看看答案怎么写的，这不是标答）
 //typedef struct Strack{
@@ -2616,18 +2966,81 @@ using namespace std;
 //        st->top++;
 //    }
 //    if(n==0)
-//        cout << 0 << endl;
+//        cout << 1 << endl;
 //    else if (n==1)
 //        cout << 2*x << endl;
 //    else
 //        cout << st->data[n] <<endl;
-//        cout << (-0 == 0)<<endl;
 //}
-//
 //
 //int main()
 //{
-//    calculate_p(4,0);
+//    calculate_p(5,1);
+//}
+//
+
+
+////T3.3.3
+//typedef struct Strack {
+//    double data[MaxSize];
+//    int top = -1;
+//    int max = MaxSize;
+//}SqStrack;
+//bool push(SqStrack& S, double a)
+//{
+//    if (S.top == S.max - 1)
+//        return false;
+//    else
+//    {
+//        S.data[++S.top] = a;
+//        return true;
+//    }
+//}
+//bool pop(SqStrack& S, double& a)
+//{
+//    if (S.top == -1)
+//        return false;
+//    else
+//    {
+//        a = S.data[S.top--];
+//        return true;
+//    }
+//}
+//bool gettop(SqStrack& S, double& x)
+//{
+//    if (S.top == -1)
+//        return false;
+//    else
+//    {
+//        x = S.data[S.top];
+//    }
+//}
+//double calculate_p(int n, double x)
+//{
+//    if (n == 0)
+//        return 1;
+//    if (n == 1)
+//        return 2 * x;
+//    else
+//    {
+//        SqStrack S;
+//        push(S, 1.0);
+//        push(S, 2 * x);
+//        double num1 = 1;
+//        double num2 = 2 * x;
+//        for (int i = 1; i < n; i++)
+//        {
+//            push(S, 2 * x * num2 - 2 * i * num1);
+//            num1 = num2;
+//            gettop(S, num2);
+//        }
+//        return num2 == 0 ? 0 : num2;
+//    }
+//}
+//int main()
+//{
+//    double a = calculate_p(5, 1);
+//    cout << a << endl;
 //}
 
 
@@ -2691,8 +3104,8 @@ using namespace std;
 //}
 //
 //
-////*************//
-////*************//
+////*************
+////*************
 ////用栈遍历
 ////栈的定义
 //typedef struct {
@@ -4628,76 +5041,76 @@ using namespace std;
 
 
 
-//T8.4.4
-//链表简单选择排序
-////带头结点的单链表
-typedef struct LNode
-{
-    int data;
-    struct LNode* next;
-}LNode;
-
-//创建带头结点的链表
-void create_Link(LNode*& L, int x)
-{
-    L = (LNode*)malloc(sizeof(LNode));
-    LNode* p, * a = L;
-    while (x > 0)
-    {
-        p = (LNode*)malloc(sizeof(LNode));
-        cin >> p->data;
-        p->next = NULL;
-        a->next = p;
-        a = p;
-        x--;
-    }
-}
-void SelectSort(LNode*& L)
-{
-    LNode* p, * pre, * q, * maxp, * maxpre;
-    q = (LNode*)malloc(sizeof(LNode));
-    q->next = L->next;
-    L->next = NULL;
-    while (q->next != NULL)
-    {
-        pre = q;
-        p = q->next;
-        maxp = p;
-        maxpre = pre;
-        while (p != NULL)
-        {
-            if (p->data > maxp->data)
-            {
-                maxp = p;
-                maxpre = pre;
-            }
-            pre = p;
-            p = p->next;
-        }
-        maxpre->next = maxp->next;
-        maxp->next = L->next;
-        L->next = maxp;
-
-
-    }
-    free(q);
-}
-//递归输出
-void print_Link(LNode*& L)
-{
-    if (L->next == NULL)
-        return;
-    else
-        cout << L->next->data << endl;
-    print_Link(L->next);
-
-}
-
-int main()
-{
-    LNode* L;
-    create_Link(L, 10);
-    SelectSort(L);
-    print_Link(L);
-}
-
+////T8.4.4
+////链表简单选择排序
+//////带头结点的单链表
+//typedef struct LNode
+//{
+//    int data;
+//    struct LNode* next;
+//}LNode;
+//
+////创建带头结点的链表
+//void create_Link(LNode*& L, int x)
+//{
+//    L = (LNode*)malloc(sizeof(LNode));
+//    LNode* p, * a = L;
+//    while (x > 0)
+//    {
+//        p = (LNode*)malloc(sizeof(LNode));
+//        cin >> p->data;
+//        p->next = NULL;
+//        a->next = p;
+//        a = p;
+//        x--;
+//    }
+//}
+//void SelectSort(LNode*& L)
+//{
+//    LNode* p, * pre, * q, * maxp, * maxpre;
+//    q = (LNode*)malloc(sizeof(LNode));
+//    q->next = L->next;
+//    L->next = NULL;
+//    while (q->next != NULL)
+//    {
+//        pre = q;
+//        p = q->next;
+//        maxp = p;
+//        maxpre = pre;
+//        while (p != NULL)
+//        {
+//            if (p->data > maxp->data)
+//            {
+//                maxp = p;
+//                maxpre = pre;
+//            }
+//            pre = p;
+//            p = p->next;
+//        }
+//        maxpre->next = maxp->next;
+//        maxp->next = L->next;
+//        L->next = maxp;
+//
+//
+//    }
+//    free(q);
+//}
+////递归输出
+//void print_Link(LNode*& L)
+//{
+//    if (L->next == NULL)
+//        return;
+//    else
+//        cout << L->next->data << endl;
+//    print_Link(L->next);
+//
+//}
+//
+//int main()
+//{
+//    LNode* L;
+//    create_Link(L, 10);
+//    SelectSort(L);
+//    print_Link(L);
+//}
+//
