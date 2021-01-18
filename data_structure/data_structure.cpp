@@ -3046,6 +3046,10 @@ using namespace std;
 
 
 
+
+
+
+
 //*******************************树********************************//
 
 ////先序创建二叉树
@@ -3201,7 +3205,11 @@ using namespace std;
 //    }
 //}
 //
-//
+
+
+
+
+
 ////通过队列实现层次遍历
 ////队列初始化操作
 //typedef struct {
@@ -3372,6 +3380,109 @@ using namespace std;
 //    CreateBitTree(T);
 //    ReLevelOrder(T);
 //}
+//
+////T5.3.4  和上面一样
+//typedef struct BiTNode {
+//	int data;
+//	BiTNode* lChild, * rChild;
+//}BiTNode, * BiTree;
+//
+//typedef struct{
+//	BiTree data[MaxSize];
+//	int top = -1;
+//}SqStack;
+//bool push(SqStack& S, BiTree& T)
+//{
+//	if (S.top == MaxSize - 1)
+//		return false;
+//	else
+//	{
+//		S.data[++S.top] = T;
+//		return true;
+//	}
+//}
+//bool pop(SqStack& S, BiTree& T)
+//{
+//	if (S.top == -1)
+//		return false;
+//	else
+//	{
+//		T = S.data[S.top--];
+//		return true;
+//	}
+//}
+//
+////队列
+//typedef struct {
+//	BiTree data[MaxSize];
+//	int front = 0;
+//	int rear = 0;
+//}SqQueue;
+//bool EnQueue(SqQueue& Q, BiTree& T)
+//{
+//	if ((Q.rear + 1) % MaxSize == Q.front)
+//		return false;
+//	else
+//	{
+//		Q.data[Q.rear] = T;
+//		Q.rear = (Q.rear + 1) % MaxSize;
+//		return true;
+//	}
+//}
+//bool DeQueue(SqQueue& Q, BiTree& T)
+//{
+//	if (Q.rear == Q.front)
+//		return false;
+//	else
+//	{
+//		T = Q.data[Q.front];
+//		Q.front = (Q.front + 1) % MaxSize;
+//		return true;
+//	}
+//}
+//
+////构造树
+//void CreateBitTree(BiTree& T)
+//{
+//    int num;
+//    cin >> num;
+//    if (num == -1)
+//        T = NULL;
+//    else {
+//        T = (BiTNode*)malloc(sizeof(BiTNode));
+//        T->data = num;
+//        CreateBitTree(T->lChild);
+//        CreateBitTree(T->rChild);
+//    }
+//}
+//void ObLevelOrder(BiTree& T)
+//{
+//	SqStack S;
+//	SqQueue Q;
+//	BiTree p = T;
+//	EnQueue(Q, p);
+//	
+//	while (Q.front != Q.rear)
+//	{
+//		DeQueue(Q, p);
+//		push(S, p);
+//		if (p->lChild)
+//			EnQueue(Q,p->lChild);
+//		if (p->rChild)
+//			EnQueue(Q,p->rChild);
+//	}
+//	while (S.top != -1)
+//	{
+//		pop(S, p);
+//		cout << p->data << endl;
+//	}
+//}
+//int main()
+//{
+//	BiTree T;
+//	CreateBitTree(T);
+//	ObLevelOrder(T);
+//}
 
 
 
@@ -3394,7 +3505,6 @@ using namespace std;
 //        CreateBitTree(T->lChild);
 //        CreateBitTree(T->rChild);
 //    }
-//
 //}
 ////非递归，利用层次遍历一层层遍历的特点，last表示每层最后一个元素，每次遍历到last就表明多了一层
 //typedef struct SqQueue{
@@ -3445,6 +3555,7 @@ using namespace std;
 //    return level;
 //}
 //
+//
 ////递归算法
 ////int find_hight(BiTree &T)
 ////{
@@ -3487,6 +3598,7 @@ using namespace std;
 //        T->lChild = NULL;
 //    if (rlen)
 //        T->rChild = buildBiTree(A, B, h1 - rlen + 1, h1, h2 - rlen + 1, h2);
+
 //    else
 //        T->rChild = NULL;
 //    return T;
@@ -4892,7 +5004,7 @@ using namespace std;
 
 
 
-////T8.3.2
+////T8.3.3
 ////奇数放在偶数前面
 //void swap(int &a, int &b)
 //{
